@@ -216,8 +216,12 @@ function removeLastOccurrences(str, value) {
  *   sumOfCodes('') => 0
  *   sumOfCodes() => 0
  */
-function sumOfCodes(/* str */) {
-  throw new Error('Not implemented');
+function sumOfCodes(str) {
+  if (typeof str !== 'string') {
+    return 0;
+  }
+
+  return str.split('').reduce((sum, char) => sum + char.charCodeAt(0), 0);
 }
 
 /**
@@ -231,10 +235,13 @@ function sumOfCodes(/* str */) {
  *   startsWith('Hello World', 'World') => false
  *   startsWith('Hello World', 'Hello') => true
  */
-function startsWith(/* str, substr */) {
-  throw new Error('Not implemented');
-}
+function startsWith(str, substr) {
+  if (typeof str !== 'string' || typeof substr !== 'string') {
+    return 'Error';
+  }
 
+  return str.startsWith(substr);
+}
 /**
  * Checks if a string ends with a specific substring.
  *
@@ -246,8 +253,12 @@ function startsWith(/* str, substr */) {
  *   endsWith('Hello World', 'World') => true
  *   endsWith('Hello World', 'Hello') => false
  */
-function endsWith(/* str, substr */) {
-  throw new Error('Not implemented');
+function endsWith(str, substr) {
+  if (typeof str !== 'string' || typeof substr !== 'string') {
+    return 'Error';
+  }
+
+  return str.endsWith(substr);
 }
 
 /**
@@ -263,8 +274,13 @@ function endsWith(/* str, substr */) {
  *   formatTime(0, 45) => "00:45"
  *   formatTime(0, 0) => "00:00"
  */
-function formatTime(/* minutes, seconds */) {
-  throw new Error('Not implemented');
+function formatTime(minutes, seconds) {
+  if (minutes < 0 || seconds < 0) {
+    return 'Error';
+  }
+  return `${minutes.toString().padStart(2, '0')}:${seconds
+    .toString()
+    .padStart(2, '0')}`;
 }
 
 /**
@@ -277,8 +293,11 @@ function formatTime(/* minutes, seconds */) {
  *   reverseString('abcdef') => 'fedcba'
  *   reverseString('12345') => '54321'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  if (typeof str === 'string') {
+    return str.split('').reverse().join('');
+  }
+  return '';
 }
 
 /**
@@ -292,8 +311,12 @@ function reverseString(/* str */) {
  *   orderAlphabetically('textbook') => 'bekoottx'
  *   orderAlphabetically('abc123xyz') => '123abcxyz'
  */
-function orderAlphabetically(/* str */) {
-  throw new Error('Not implemented');
+
+function orderAlphabetically(str) {
+  if (typeof str === 'string') {
+    return str.split('').sort().join('');
+  }
+  return '';
 }
 
 /**
@@ -308,8 +331,11 @@ function orderAlphabetically(/* str */) {
  *   containsSubstring('JavaScript is Fun', 'Python') => false
  *   containsSubstring('12345', '34') => true
  */
-function containsSubstring(/* str, substring */) {
-  throw new Error('Not implemented');
+function containsSubstring(str, substring) {
+  if (typeof str !== 'string' || typeof substring !== 'string') {
+    return false;
+  }
+  return str.includes(substring);
 }
 
 /**
@@ -326,10 +352,32 @@ function containsSubstring(/* str, substring */) {
  *   countVowels('aEiOu') => 5
  *   countVowels('XYZ') => 1
  */
-function countVowels(/* str */) {
-  throw new Error('Not implemented');
-}
+function countVowels(str) {
+  const vowels = new Set([
+    'a',
+    'e',
+    'i',
+    'o',
+    'u',
+    'y',
+    'A',
+    'E',
+    'I',
+    'O',
+    'U',
+    'Y',
+  ]);
 
+  let count = 0;
+
+  for (let i = 0; i < str.length; i += 1) {
+    const char = str[i];
+    if (vowels.has(char)) {
+      count += 1;
+    }
+  }
+  return count;
+}
 /**
  * Returns true if the string is a palindrome; otherwise false.
  * https://en.wikipedia.org/wiki/Palindrome
@@ -343,8 +391,12 @@ function countVowels(/* str */) {
  *   isPalindrome('apple') => false
  *   isPalindrome('No lemon, no melon') => true
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  const cleanedStr = str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+
+  const reversedStr = cleanedStr.split('').reverse().join('');
+
+  return cleanedStr === reversedStr;
 }
 
 /**
